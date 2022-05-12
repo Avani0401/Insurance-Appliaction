@@ -1,0 +1,108 @@
+<header class="h-100">
+  <div class="view intro-2">
+    <div class="full-bg-img">
+      <div class="mask rgba-purple-light flex-center">
+        <div class="container text-center white-text wow fadeInUp">
+          <h2>Insureino</h2>
+          <br>
+          <h5>With insurance you'll have no more worries!.</h5>
+          <br>
+          <h5>insurance puts a smile on your face.</h5>
+          <p>
+            Getting started doesn’t cost anything. Just connect with one of our financial professionals to discuss your needs. Together, you can clarify your financial position, goals, and aspirations and co-create a plan to ensure you’re prepared for whatever life may bring. Our financial professionals can give you a good sense of how much various solutions cost, so you can make the best decisions for you.
+          </p>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  
+<div class="container view-2">
+  <div class="row  pt-5  pb-5" >
+    <div class="col-sm center">
+      <p class="text-roboto">
+        Let's find you<br /><br>
+        the <strong>Best Insurance</strong><br /><br>
+        as per your need.
+      </p>
+    </div>
+    <div class="col-sm">
+      <mdb-card>
+        <mdb-card-img
+          src="../../../assets/life.jpg"
+          alt="Card image cap"
+        ></mdb-card-img>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h4 style="text-align: center">Life Insurance</h4>
+          </mdb-card-title>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+    <div class="col-sm">
+      <mdb-card>
+        <mdb-card-img
+          src="../../../assets/dental-insurance.jpg"
+          alt="Card image cap"
+        ></mdb-card-img>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h4 style="text-align: center">Dental Insurance</h4>
+          </mdb-card-title>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-3 bottomback">
+  <div class="row  mask rgba-blue-light flex-center pt-3">
+    <div class="col-sm-12 text-center">
+      <h4>What we offer you.</h4>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let element of policies">
+      <mdb-card
+        [style]="element.policyType==='life' ? 'background-image: url(../../../assets/life.jpg); background-size:cover;' : 'background-image: url(../../../assets/dental-insurance.jpg); background-size:cover;'"
+        class="card-image mb-3 mx-2  "
+      >
+        <div
+          class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4"
+          style="height:50vh"
+        >
+          <div>
+            <h5 class="pink-text">
+              <mdb-icon fas [icon]="element.policyType==='life' ? 'heartbeat' : 'teeth'"></mdb-icon>
+              {{
+                element.policyType.charAt(0).toUpperCase() +
+                  element.policyType.toLowerCase().slice(1)
+              }}
+              Insurance
+            </h5>
+            <h3 class="card-title pt-2">
+              <strong>{{ element.policyName }}</strong>
+            </h3>
+            <p>{{element.description}}</p>
+            <a mdbBtn color="pink" class="waves-light" mdbWavesEffect
+            *ngIf="isLoggedIn() && matchUser()"
+            (click)="onClickBuy(element.policyNumber)"
+            >
+              <mdb-icon far icon="clone" class="left"></mdb-icon>
+              Buy Policy</a
+            >
+            <a mdbBtn color="pink" class="waves-light" mdbWavesEffect
+            *ngIf="!isLoggedIn()"
+            (click)="onClickBuyLogin()">
+              Read more
+              <mdb-icon fas icon="angle-double-right" class="left"></mdb-icon>
+              </a
+            >
+          </div>
+        </div>
+      </mdb-card>
+    </div>
+  </div>
+</div>
+</main>

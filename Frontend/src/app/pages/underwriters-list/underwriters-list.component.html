@@ -1,0 +1,72 @@
+<div class="container">
+  <mat-tab-group
+    [disableRipple]="false"
+    mat-align-tabs="center"
+    style="margin-top: 50px"
+  >
+    <mat-tab label="New Requests">
+      <table mdbTable class="z-depth-1" small="true" hover="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayedColumns" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="UnderwriterRequests.length===0">
+          <tr>
+            <td align="center" colspan="7"> No data found</td>
+          </tr>
+        </tbody>
+        <tbody hover="true" *ngIf="UnderwriterRequests.length>0">
+          <tr *ngFor="let element of UnderwriterRequests; let i = index">
+            <td>
+              <button
+                *ngIf="!element.enabled"
+                mdbBtn
+                color="primary"
+                size="sm"
+                (click)="activateUnderwriter(element)"
+              >
+                Accept
+              </button>
+
+              <button *ngIf="element.enabled" mdbBtn color="danger" size="sm">
+                Reject
+              </button>
+            </td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ element.userName }}</td>
+            <td>{{ element.userFirstName }} {{ element.userLastName }}</td>
+            <td>{{ element.email }}</td>
+            <td>{{ element.phone }}</td>
+            <td>{{ element.enabled ? "Active" : "Disabled" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Underwriters ">
+      <table mdbTable class="z-depth-1" small="true" hover="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of UnderwriterdisplayedColumns" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody hover="true">
+          <tr *ngFor="let element of UnderwriterAll; let i = index">
+            
+            <td>{{ i + 1 }}</td>
+            <td>{{ element.userName }}</td>
+            <td>{{ element.userFirstName }} {{ element.userLastName }}</td>
+            <td>{{ element.email }}</td>
+            <td>{{ element.phone }}</td>
+            <td>{{ element.enabled ? "Active" : "Disabled" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

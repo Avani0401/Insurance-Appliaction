@@ -1,0 +1,26 @@
+@import "../../../styles.scss" ;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+
+.view {
+  background: url("../../../assets/Oreti.png") no-repeat center center;
+  background-size: cover;
+  height: 91vh;
+}
+
+.font{
+  font-family: 'Noto Serif', serif;
+}
+
+.full-width{
+  width : 100%;
+}
+
+.error{
+  color: red;
+}
+
+.hidepassword{
+  background: transparent ;
+  border: none;
+  outline: none;
+}

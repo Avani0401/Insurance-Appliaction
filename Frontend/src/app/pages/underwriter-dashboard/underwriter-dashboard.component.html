@@ -1,0 +1,131 @@
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" style="margin-top: 50px">
+    <mat-tab label="Policy Requests">
+      <table mdbTable class="z-depth-1" small="true" hover="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayHeads" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="allRequests.length===0">
+          <tr>
+            <td colspan="7" align="center">No data found</td>
+          </tr>
+        </tbody>
+        <tbody hover="true"  *ngIf="allRequests.length>0">
+          <tr *ngFor="let element of allRequests; let i = index">
+            <td style="width: 32%">
+              <button
+                mdbBtn
+                size="sm"
+                gradient="aqua"
+                (click)="openDialog(element)"
+              >
+                Info
+              </button>
+
+              <button
+                mdbBtn
+                size="sm"
+                gradient="blue"
+                (click)="AcceptDialog(element)"
+              >
+                Approve
+              </button>
+
+              <button
+                mdbBtn
+                size="sm"
+                gradient="peach"
+                (click)="basicModal.show(); requestdata = element"
+              >
+                Reject
+              </button>
+            </td>
+            <td>
+              {{ element.policy.policyName }}
+            </td>
+            <td>{{ element.policy.tenure }} Yrs.</td>
+            <td>Rs. {{ element.policy.premium }}</td>
+            <td>{{ element.nominee.nomineeFirstName }} {{ element.nominee.nomineeLastName }}</td>
+            <td>{{ element.policyApproved.toUpperCase() }}</td>
+            <td>{{ element.buyOn }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div
+  mdbModal
+  #basicModal="mdbModal"
+  class="modal fade top"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myBasicModalLabel"
+  aria-hidden="true"
+  [config]="{ backdrop: true, ignoreBackdropClick: false, show: showmodal }"
+>
+  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-content">
+      <form #rejectform="ngForm" (submit)="RejectDialog(rejectform)">
+        <div class="modal-body">
+          Are you sure you want to reject this request ? If yes, Please mention
+          reason
+
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field appearance="legacy" style="width: 100%">
+                <mat-label>Reason</mat-label>
+                <input
+                  placeholder="Rejection reason"
+                  type="text"
+                  matInput
+                  required
+                  ngModel
+                  name="reason"
+                  id="reason"
+                  #reason
+                  autofocus
+                  minlength="10"
+                  maxlength="100"
+                />
+                <mat-error class = "error">Reason length must be more than 10</mat-error>
+                <mat-hint>{{ reason.value.length }}/100</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              mdbBtn
+              color="secondary"
+              class="waves-light"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+              mdbWavesEffect
+              size="sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              mdbBtn
+              color="danger"
+              size="sm"
+              class="relative waves-light"
+              mdbWavesEffect
+              [disabled]="reason.value.length<10"
+              (click)="basicModal.hide()"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

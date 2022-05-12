@@ -1,0 +1,199 @@
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" style="margin-top: 50px">
+    <mat-tab label="Claims Request">
+      <table mdbTable class="z-depth-1" small="true" hover="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayHeads" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody hover="true" *ngIf="claimList.length>0">
+          <tr  *ngFor="let element of claimList; let i = index">
+            <td style="width: 24%">
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="aqua"
+                mdbWavesEffect
+                (click)="
+                  openDialog({
+                    illness: element.illness,
+                    hospitalName: element.hospitalName,
+                    policyName: element.policyholder.policy.policyName,
+                    policyHolder:element.policyholder.policyholderId,
+                    nominee:element.policyholder.nominee.nomineeId
+                  })
+                "
+              >
+                <mdb-icon fas icon="info" class="mr-1"></mdb-icon>Info
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="blue"
+                mdbWavesEffect
+                *ngIf="element.status === 'PENDING'"
+                (click)="acceptModal.show(); requestdata=element"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Accept
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="peach"
+                mdbWavesEffect
+                *ngIf="element.status === 'PENDING'"
+                (click)="basicModal.show(); requestdata = element;"
+                
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Reject
+              </button>
+            </td>
+            <td>
+              {{ i + 1 }}
+            </td>
+
+            <td>{{ element.policyholder.policy.policyName }}</td>
+
+            <td>Rs. {{ element.policyholder.maturityAmount }}</td>
+           
+            <td>{{element.byNominee ? element.policyholder.nominee.nomineeFirstName+' (Nominee)' :  element.policyholder.user.userFirstName+' (User)' }}</td>
+            <td>{{ element.issued_date }}</td>
+            <td>{{ element.status }}</td>
+          </tr>
+        </tbody>
+        
+        <tbody hover="true" *ngIf="claimList.length===0">
+          <tr>
+            <td colspan="7" style="text-align: center;">
+              No data found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div
+  mdbModal
+  #basicModal="mdbModal"
+  class="modal fade top"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myBasicModalLabel"
+  aria-hidden="true"
+  [config]="{ backdrop: true, ignoreBackdropClick: false }"
+>
+  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-content">
+      <form #rejectform="ngForm" (submit)="openRejectClaim(rejectform)">
+        <div class="modal-body">
+          Are you sure you want to reject this request ? If yes, Please mention
+          reason
+
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field appearance="legacy" style="width: 100%">
+                <mat-label>Reason</mat-label>
+                <input
+                  placeholder="Rejection reason"
+                  type="text"
+                  matInput
+                  required
+                  ngModel
+                  name="reason"
+                  id="reason"
+                  #reason
+                  autofocus
+                  minlength="10"
+                  maxlength="100"
+                />
+                <mat-error class = "error" class = "error">Reason length must be greater than 10</mat-error>
+                <mat-hint>{{ reason.value.length }}/100</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              mdbBtn
+              color="secondary"
+              class="waves-light"
+              aria-label="Close"
+              (click)="basicModal.hide()"
+              mdbWavesEffect
+              size="sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              mdbBtn
+              color="danger"
+              size="sm"
+              class="relative waves-light"
+              mdbWavesEffect
+              [disabled]="reason.value.length<10"
+              (click)="basicModal.hide()"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  mdbModal
+  #acceptModal="mdbModal"
+  class="modal fade top"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myBasicModalLabel"
+  aria-hidden="true"
+  [config]="{ backdrop: true, ignoreBackdropClick: false }"
+>
+  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+          Are you sure you want to accept this request ? 
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              mdbBtn
+              color="secondary"
+              class="waves-light"
+              aria-label="Close"
+              (click)="acceptModal.hide()"
+              mdbWavesEffect
+              size="sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              mdbBtn
+              color="success"
+              size="sm"
+              class="relative waves-light"
+              mdbWavesEffect
+              (click)="acceptModal.hide(); openAcceptClaim()"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

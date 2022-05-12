@@ -1,0 +1,459 @@
+<div class="container">
+  <mat-stepper
+    linear
+    #stepper
+    [orientation]="(stepperOrientation | async)!"
+    style="margin-top: 50px"
+  >
+  <mat-step [stepControl]="policyholder">
+    <form [formGroup]="policyholder">
+      <ng-template matStepLabel>Fill out your details</ng-template>
+      <div class="row" style="width: 100%">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="sex" id="sex" required>
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+            <mat-error class = "error">Gender required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Date of birth</mat-label>
+            <input
+              placeholder=""
+              formControlName="dateOfBirthPolicyHolder"
+              id="dob"
+              required
+              matInput
+              [min]="maxAge"
+              [max]="minAge"
+              type="date"
+              (change)="checkpolicyholderdatevalidation($event)"
+            />
+            <mat-error class = "error">Date of birth required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Premium duration</mat-label>
+            <mat-select
+              formControlName="premiumDuration"
+              id="premiumDuration"
+              required
+            >
+              <mat-option value="1">Monthly</mat-option>
+              <mat-option value="12">Yearly</mat-option>
+            </mat-select>
+            <mat-error class = "error">Premium duration required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              required
+              formControlName="residence"
+              id="residence"
+              placeholder="Address"
+            />
+            <mat-error class = "error">Address required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>City</mat-label>
+            <input
+              matInput
+              placeholder="City"
+              formControlName="city"
+              id="city"
+              required
+            />
+            <mat-error class = "error">City required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>State </mat-label>
+            <input
+              matInput
+              placeholder="State"
+              formControlName="state"
+              id="state"
+              required
+            />
+            <mat-error class = "error">State required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Pincode</mat-label>
+            <input
+              matInput
+              placeholder="Pincode"
+              formControlName="pincode"
+              id="pincode"
+              required
+              type="number"
+              pattern="[0-9]{6}"
+            />
+            <mat-error class = "error">Pincode required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Previous medical history</mat-label>
+            <input
+              matInput
+              placeholder="Previous medical history"
+              formControlName="medical"
+              type="text"
+              id="medical"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <mat-form-field class="full-width" appearance="legacy">
+            <mat-label>Previous accidents</mat-label>
+            <input
+              matInput
+              placeholder="Previous accidents"
+              formControlName="accidents"
+              type="text"
+              id="accidents"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4"></div>
+        <div class="col-sm-12 col-lg-4">
+          <button
+            mdbBtn
+            matStepperNext
+            class="full-width mb-5"
+            gradient="blue"
+            type="button"
+            size="sm"
+            [disabled]="policyholderBtnmindisabled || policyholderBtnmaxdisabled"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+ <mat-step [stepControl]="nominee">
+    <form [formGroup]="nominee">
+      <ng-template matStepLabel>Fill out Nominee details</ng-template>
+      <div class="row" style="width: 100%">
+        <div class="col-lg-2"></div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>First Name of Nominee</mat-label>
+            <input
+              autofocus
+              matInput
+              placeholder="Name"
+              ngModel
+              formControlName="nomineeFirstName"
+              id="nomineeFirstName"
+              required
+            />
+            <mat-error class = "error">Nominee first name required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Last name of Nominee</mat-label>
+            <input
+              matInput
+              placeholder="Name"
+              ngModel
+              formControlName="nomineeLastName"
+              id="nomineeLastName"
+              required
+            />
+            <mat-error class = "error">Nominee last name required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Email"
+              ngModel
+              formControlName="email"
+              id="email"
+              required
+            />
+            <mat-error class = "error">Email required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Mobile No</mat-label>
+            <input
+              type="tel"
+              matInput
+              placeholder="Phone Number"
+              ngModel
+              formControlName="nomineemobileNo"
+              id="nomineemobileNo"
+              required
+              pattern="[6-9]{1}[0-9]{9}"
+            />
+            <mat-error class = "error">Phone number must contain 10 numbers.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Relationship </mat-label>
+            <input
+              matInput
+              placeholder="Relationship"
+              ngModel
+              formControlName="nomineeRelationship"
+              id="nomineeRelationship"
+              required
+            />
+            <mat-error class = "error">Relationship required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Date of birth</mat-label>
+            <input
+              placeholder=""
+              formControlName="nomineeDOB"
+              id="nomineeDOB"
+              required
+              matInput
+              [max]="nomineeAge"
+              [min]="nomineemaxAge"
+              type="date"
+              (change)="checknomineeholderdatevalidation($event)"
+            />
+          
+
+            <mat-error class = "error">Date of birth required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button
+            class="full-width"
+            mdbBtn
+            gradient="blue"
+            size="sm"
+            type="button"
+            matStepperPrevious
+          >
+            Back
+          </button>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button
+            class="full-width"
+            mdbBtn
+            gradient="blue"
+            size="sm"
+            type="button"
+            matStepperNext
+            [disabled]="nomineeBtnmaxdisabled || nomineeBtnmindisabled"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+    <mat-step [stepControl]="dependents">
+      <form>
+        <ng-template matStepLabel>Fill out dependents details</ng-template>
+        <div class="alert alert-info" role="alert">
+          Adding dependents is optional, You can delete fields and move forward
+          with your application.
+          <button class="btn btn-sm btn-danger flex-end" (click)="removeall()"><mdb-icon far icon="trash-alt" color="red"></mdb-icon></button>
+        </div>
+
+        <div
+          class="row"
+          style="width: 100%"
+          *ngFor="let dependent of dependentsarray; let i = index"
+        >
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <mat-form-field class="full-width" appearance="legacy">
+              <mat-label>{{i+1}}. Name of dependent</mat-label>
+              <input
+                [(ngModel)]="dependent.dependent_name"
+                name="dependent_name"
+                matInput
+                placeholder="Name of dependents"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <mat-form-field class="full-width" appearance="legacy">
+              <mat-label>Date of birth of dependent</mat-label>
+              <input
+                [(ngModel)]="dependent.date_of_birth"
+                name="date_of_birth"
+                matInput
+                type="date"
+                [min]="nomineemaxAge"
+                [max]="today"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <mat-form-field class="full-width" appearance="legacy">
+              <mat-label>Contact Number</mat-label>
+              <input
+                [(ngModel)]="dependent.dependent_mobile_no"
+                name="dependent_mobile_no"
+                matInput
+                placeholder="Contact Number"
+                required
+                pattern="[6-9]{1}[0-9]{9}"
+                type="tel"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <mat-form-field class="full-width" appearance="legacy">
+              <mat-label>Relationship with Policy Holder</mat-label>
+              <input
+                [(ngModel)]="dependent.dependent_relationship"
+                name="dependent_relationship"
+                matInput
+                placeholder="Relationship"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <mat-form-field class="full-width" appearance="legacy">
+              <mat-label>Address of dependent</mat-label>
+              <input
+                [(ngModel)]="dependent.dependent_address"
+                name="dependent_address"
+                matInput
+                placeholder="Name of dependents"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-2">
+            <button
+              type="button"
+              mdbBtn
+              size="sm"
+              gradient="peach"
+              mdbWavesEffect
+              (click)="removeThisForm(dependent.id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-lg-3"></div>
+          <div class="col-sm-12 col-md-12 col-lg-2">
+            <button
+              class="full-width"
+              mdbBtn
+              gradient="blue"
+              size="sm"
+              type="button"
+              matStepperPrevious
+            >
+              Back
+            </button>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-2">
+            <button
+              class="full-width"
+              mdbBtn
+              gradient="cyan"
+              size="sm"
+              type="button"
+              (click)="addThisForm()"
+            >
+              Create Dependent
+            </button>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-2">
+            <button
+              class="full-width"
+              mdbBtn
+              gradient="blue"
+              size="sm"
+              type="button"
+              matStepperNext
+              (click)="btnDisabled = false"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Save details</ng-template>
+
+      <div class="row">
+        <div class="col-lg-12 flex-center">
+          <div>
+            <p>You are now done.</p>
+            <p>Please confirm your details before buying this policy.</p>
+            <p>Details can't be modified after buying.</p>
+            <br />
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-2"></div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button
+            mdbBtn
+            gradient="peach"
+            size="sm"
+            class="full-width"
+            matStepperPrevious
+          >
+            Back
+          </button>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button
+            mdbBtn
+            gradient="blue"
+            size="sm"
+            class="full-width"
+            mat-button
+            (click)="saveformdetails(); btnDisabled = true"
+            [disabled]="btnDisabled"
+          >
+            Save Details
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

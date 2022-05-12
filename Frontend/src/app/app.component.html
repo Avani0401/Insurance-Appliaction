@@ -1,0 +1,124 @@
+<app-navbar></app-navbar>
+<router-outlet *ngIf="!isLoggedIn()"></router-outlet>
+<app-footer *ngIf="!isLoggedIn()"></app-footer>
+
+<ng-sidebar-container *ngIf="isLoggedIn()">
+  <ng-sidebar
+    [closeOnClickBackdrop]="true"
+    [closeOnClickOutside]="true"
+    [keyClose]="true"
+    [(opened)]="_opened"
+    [showBackdrop]="false"
+    [dock]="true"
+    [animate]="true"
+    mode="push"
+    #sidebar
+    class="ng-sidebar ng-sidebar--over ng-sidebar--animate"
+  >
+    <div class="list-group sidebar">
+      <a
+        href="#"
+        class="list-group-item list-group-item-action flex-column align-items-start active"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h3 class="mb-1">{{ user.userName }}</h3>
+          <small>{{ user.role }}</small>
+        </div>
+      </a>
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchAdmin() || matchUnderwriter()"
+        routerLink="/users/all"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Users</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchAdmin()"
+        routerLink="/underwriter/all"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Underwriters</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchAdmin()"
+        routerLink="/create-policy"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        New Policy</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        routerLink="/policy"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Policy</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchAdmin()"
+        routerLink="/claims/all"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Claims</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchUser()"
+        routerLink="/policyList/1"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        My Policy</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchUser()"
+        routerLink="/your-claims"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        My Claims</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light"
+        mdbWavesEffect
+        *ngIf="matchUnderwriter()"
+        routerLink="/underwriter"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Policy Requests</a
+      >
+      <a
+        href="#"
+        class="list-group-item list-group-item-action waves-light align-bottom"
+        mdbWavesEffect
+        (click)="logout()"
+        ><mdb-icon fas icon="sign-out-alt" class="indigo-text mr-2"></mdb-icon>
+        Logout</a
+      >
+    </div>
+    <button class="button-side-right flex-center" (click)="_opened = !_opened">
+      <mdb-icon fas icon="angle-left" class="icon" size="lg"></mdb-icon>
+    </button>
+  </ng-sidebar>
+
+  <div
+    ng-sidebar-content
+    class="ng-sidebar__content ng-sidebar__backdrop ng-sidebar__content--animate"
+    style="overflow-y: hidden"
+  >
+    <router-outlet></router-outlet>
+    <button class="button-side flex-center" (click)="_opened = !_opened">
+      <mdb-icon fas icon="angle-right" class="icon" size="lg"></mdb-icon>
+    </button>
+    <app-footer></app-footer>
+  </div>
+</ng-sidebar-container>

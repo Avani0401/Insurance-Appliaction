@@ -1,0 +1,57 @@
+<mdb-navbar
+  SideClass="navbar navbar-expand-lg navbar-dark primary-color ie-nav fixed-top scrolling-navbar intro-fixed-nav" [containerInside]="false"
+>
+  <mdb-navbar-brand routerLink="/"
+    ><a class="navbar-brand" href="#">
+      <img
+        src="../../../assets/life.jpg"
+        height="20"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      Insureino</a
+    ></mdb-navbar-brand
+  >
+
+  <links>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLink="/policy">
+        <a class="nav-link waves-light" mdbWavesEffect
+          ><mdb-icon fas icon="table"></mdb-icon> Policy</a
+        >
+      </li>
+      <li class="nav-item"
+      *ngIf="!isLoggedIn()" routerLink="/claim">
+        <a class="nav-link waves-light" mdbWavesEffect
+          ><mdb-icon fas icon="receipt"></mdb-icon> Claim</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="login && !isLoggedIn()" routerLink="/sign-in">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="sign-in-alt"></mdb-icon> Sign In
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="!login && !isLoggedIn()" routerLink="/sign-up">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="sign-in-alt"></mdb-icon> Sign Up
+        </a>
+      </li>
+
+      <li class="nav-item dropdown" dropdown 
+      *ngIf="isLoggedIn()">
+        <a
+          mdbWavesEffect
+          type="button"
+          class="nav-link waves-light"
+          mdbWavesEffect
+          (click)="logout()"
+        >
+        <mdb-icon fas icon="sign-out-alt"></mdb-icon>Log out<span
+            class="caret"
+          ></span
+        ></a>
+        
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>

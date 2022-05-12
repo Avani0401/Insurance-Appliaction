@@ -1,0 +1,146 @@
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" style="margin-top: 50px">
+    <mat-tab label="Life Insurance">
+      <table mdbTable class="z-depth-1" small="true" hover="true" >
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayedColumns" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody hover="true">
+          <tr *ngFor="let element of lifePolicy; let i = index">
+            <td style="width: 24%">
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="aqua"
+                mdbWavesEffect
+                (click)="openDialog(element)"
+              >
+                <mdb-icon fas icon="info" class="mr-1"></mdb-icon>Info
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="blue"
+                mdbWavesEffect
+                *ngIf="isLoggedIn() && matchUser()"
+                (click)="onClickBuy(element.policyNumber)"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Buy
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="blue"
+                mdbWavesEffect
+                *ngIf="!isLoggedIn()"
+                (click)="onClickBuyLogin(element.policyNumber)"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Buy
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="purple"
+                mdbWavesEffect
+                *ngIf="isLoggedIn() && matchAdmin()"
+                routerLink="/modify-policy/{{ element.policyNumber }}"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Edit
+              </button>
+            </td>
+            <td>
+              {{ i + 1 }}
+            </td>
+
+            <td>{{ element.policyName }}</td>
+
+            <td>Rs. {{ element.sumInsured }}</td>
+            <td>{{ element.tenure }} Yrs.</td>
+            <td>Rs. {{ element.premium }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <mat-tab label="Dental Insurance">
+      <table mdbTable class="z-depth-1" small="true" hover="true">
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayedColumns" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let element of dentalPolicy; let i = index">
+            <td style="width: 24%">
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="aqua"
+                mdbWavesEffect
+                (click)="openDialog(element)"
+              >
+                <mdb-icon fas icon="info" class="mr-1"></mdb-icon>Info
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="blue"
+                mdbWavesEffect
+                *ngIf="isLoggedIn() && matchUser()"
+                (click)="onClickBuy(element.policyNumber)"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Buy
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                gradient="blue"
+                mdbWavesEffect
+                *ngIf="!isLoggedIn()"
+                (click)="onClickBuyLogin(element.policyNumber)"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Buy
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="purple"
+                mdbWavesEffect
+                *ngIf="isLoggedIn() && matchAdmin()"
+                routerLink="/modify-policy/{{ element.policyNumber }}"
+              >
+                <mdb-icon fas icon="magic" class="mr-1"></mdb-icon>Edit
+              </button>
+            </td>
+            <td>
+              {{ i + 1 }}
+            </td>
+
+            <td>{{ element.policyName }}</td>
+
+            <td>Rs. {{ element.sumInsured }}</td>
+            <td>{{ element.tenure }} Yrs.</td>
+            <td>Rs. {{ element.premium }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

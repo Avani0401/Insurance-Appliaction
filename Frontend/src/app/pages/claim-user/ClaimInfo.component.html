@@ -1,0 +1,21 @@
+<h3 matDialogTitle>{{ data.claimData.policyName }}</h3>
+
+<mat-dialog-content>
+  <table style="width: 500px;">
+    <tr style="text-align: left;">
+      <th colspan="2">Policy Holder Id : {{data.claimData.policyHolder}} </th>
+      <th colspan="2">Nominee Id : {{data.claimData.nominee}} </th>
+    </tr>
+  </table>
+  <p>
+    <span style="font-weight: 500">Reason : </span> {{ data.claimData.illness }}
+  </p>
+  <p>
+    <span style="font-weight: 500">Hospital : </span
+    >{{ data.claimData.hospitalName }}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mdbBtn color="danger" size="sm" [mat-dialog-close]="true" >Close</button>
+</mat-dialog-actions>

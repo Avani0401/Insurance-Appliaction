@@ -1,0 +1,48 @@
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" style="margin-top: 50px">
+    <mat-tab label="My Claims">
+      <table mdbTable class="z-depth-1" small="true" hover="true" >
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayHeads" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="claimList.length===0">
+          <tr>
+            <td colspan="7" align="center">No data found</td>
+          </tr>
+        </tbody>
+        <tbody hover="true"  *ngIf="claimList.length>0">
+          <tr *ngFor="let element of claimList; let i = index">
+            <td style="width: 24%">
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="aqua"
+                mdbWavesEffect
+                (click)="openDialog({illness:element.illness, hospitalName:element.hospitalName, policyName:element.policyholder.policy.policyName, policyHolder:element.policyholder.policyholderId, nominee:element.policyholder.nominee.nomineeId})"
+              >
+                <mdb-icon fas icon="info" class="mr-1"></mdb-icon>Info
+              </button>
+             
+            </td>
+            <td>
+              {{ i + 1 }}
+            </td>
+
+            <td>{{ element.policyholder.policy.policyName }}</td>
+
+            <td>Rs. {{ element.policyholder.maturityAmount }}</td>
+            <td>{{element.byNominee ? element.policyholder.nominee.nomineeFirstName+' (Nominee)' :  element.policyholder.user.userFirstName+' '+element.policyholder.user.userLastName }}</td>
+            <td>{{ element.issued_date }}</td>
+            <td>{{ element.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+   
+  </mat-tab-group>
+</div>

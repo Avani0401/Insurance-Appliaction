@@ -1,0 +1,22 @@
+<h3 mat-dialog-title>{{data.policyName}}</h3>
+<mat-dialog-content class="mat-typography">
+ <p style="font-weight: 300;">{{data.description}}</p>
+ <br>
+ <mat-divider></mat-divider>
+ <table style="width: 400px; text-align: left;">
+  <tr>
+   <th><span style="font-weight: 400;">Minimum age : </span></th>
+   <td> {{data.minAge}}</td>
+   <th> <span style="font-weight: 400;">Maximum age : </span></th>
+   <td>{{data.maxAge}}</td>
+  </tr>
+  <tr>
+   <th><span style="font-weight: 400;">Tenure : </span></th>
+   <td> {{data.tenure}}</td>
+  </tr>
+ </table>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mdbBtn type="button" size="sm"  color="danger"  [mat-dialog-close]="true" cdkFocusInitial>close</button>
+</mat-dialog-actions>

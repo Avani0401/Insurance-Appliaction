@@ -1,0 +1,56 @@
+@import "../signup/signup.component.scss";
+
+.text-roboto {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.view {
+  background: url("../../../assets/image-3033200.jpg") no-repeat center center;
+  background-size : cover;
+  height : 100vh;
+}
+
+.view-2{
+  background: url("../../../assets/Taieri.png") no-repeat center center;
+  background-size : cover;
+}
+.bottomback {
+  background: url("../../../assets/wave.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.topback {
+  background: url("../../../assets/wave.svg");
+  background-repeat: no-repeat;
+  background-position: top;
+  transform: scaleX(-1);
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #4285F4;
+  }
+}
+/* If screen size is more than 600px wide, set the font-size of <div> to 80px */
+@media screen and (min-width: 600px) {
+  .svg {
+    margin-top: -20%;
+    margin-bottom: -1%;
+  }
+}
+
+/* If screen size is 600px wide, or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  .svg {
+    margin-top: -60vh;
+    margin-bottom: -51vh;
+  }
+}

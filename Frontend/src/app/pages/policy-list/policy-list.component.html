@@ -1,0 +1,104 @@
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" style="margin-top: 50px">
+    <mat-tab label="My Policies">
+      <table
+        #tableEl="mdbTable"
+        mdbTable
+        class="z-depth-1"
+        small="true"
+        hover="true"
+        class="mb-5"
+      >
+        <thead>
+          <tr>
+            <th *ngFor="let head of displayHeads" scope="col">
+              {{ head }}
+            </th>
+          </tr>
+        </thead>
+        <tbody hover="true" *ngIf="policyList.length === 0">
+          <tr>
+            <td colspan="8" align="center">No data found</td>
+          </tr>
+        </tbody>
+        <tbody hover="true" *ngIf="policyList.length > 0">
+          <tr *ngFor="let element of policyList; let i = index">
+            <td style="width: 32%">
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                gradient="aqua"
+                mdbWavesEffect
+                (click)="openDialog(element)"
+              >
+                <mdb-icon fas icon="info" class="mr-1"></mdb-icon>Info
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                [gradient]="element.hasClaimed ? '' : 'blue'"
+                mdbWavesEffect
+                *ngIf="element.policyApproved !== 'REJECTED'"
+                (click)="
+                  onClickClaim(element.policyholderId, element.hasClaimed)
+                "
+                [disabled]="element.policyApproved !== 'APPROVED'"
+                [color]="element.hasClaimed ? 'blue-grey' : ''"
+              >
+                <mdb-icon fas icon="heartbeat" class="mr-1"></mdb-icon> Claim
+              </button>
+              <button
+                mdbBtn
+                type="button"
+                size="sm"
+                col
+                [gradient]="element.hasClaimed ? '' : 'purple'"
+                [color]="element.hasClaimed ? 'blue-grey' : ''"
+                mdbWavesEffect
+                *ngIf="element.policyApproved !== 'REJECTED'"
+                [disabled]="element.policyApproved !== 'APPROVED'"
+                (click)="paypremium(element.policyholderId, element.hasClaimed)"
+              >
+                <mdb-icon fas icon="shopping-cart" class="mr-1"></mdb-icon>Pay
+              </button>
+            </td>
+
+            <td>{{ element.policyholderId }}</td>
+
+            <td>{{ element.policy.policyName }}</td>
+            <td
+              [style]="element.maturityDate === null ? 'text-align:center' : ''"
+            >
+              {{ element.maturityDate !== null ? element.maturityDate : "---" }}
+            </td>
+            <td>Rs. {{ element.policyHolderPremium }}</td>
+            <td>
+              {{ element.nominee.nomineeFirstName }}
+              {{ element.nominee.nomineeLastName }}
+            </td>
+            <td>{{ element.policyApproved }}</td>
+            <td>{{ element.hasClaimed ? "Claimed" : "----" }}</td>
+
+            <td>{{ element.buyOn }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="9">
+              <mat-paginator
+                [length]="pageEvent.length"
+                [pageSize]="pageEvent.pageSize"
+                (page)="pageEvent = $event; changePage()"
+                aria-label="Select page"
+              >
+              </mat-paginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

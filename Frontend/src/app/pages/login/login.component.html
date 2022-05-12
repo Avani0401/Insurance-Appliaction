@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm col-md col-lg-7 view flex-center">
+      <div class="font text-center">
+        <h2>Insureino</h2>
+        <br />
+        <h5>With insurance you'll have no more worries!.</h5>
+      </div>
+    </div>
+    <div class="col-sm col-md col-lg-5">
+      <div class="flex-center">
+        <form class="text-center border border-light p-5" #loginForm="ngForm" (ngSubmit)="login()">
+          <p class="h4 mb-4">Welcome back!!!</p>
+          <h5>To continue, please enter your username and password.</h5>
+          <mat-form-field appearance="legacy" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" maxlength="15" placeholder=" Username" required ngModel name="userName"
+              id="userName" [formControl]="inputs.username" autofocus>
+            <mat-error class = "error" *ngIf="inputs.username.invalid" class = "error">{{ getUsernameErrorMessage() }}</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="legacy" class = "full-width">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="togglepassword ? 'password' : 'text'" placeholder=" Password" required ngModel
+              name="userPassword" id="userPassword" [formControl]="inputs.password" >
+            <button mat-icon-button matSuffix (click)="togglepassword = !togglepassword"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="togglepassword" class = "hidepassword">
+              <mat-icon>{{togglepassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error class = "error" *ngIf="inputs.password.invalid" class = "error">{{ getPasswordErrorMessage() }}
+            </mat-error>
+          </mat-form-field>
+
+
+
+          <button size="sm" mdbBtn color="info" block="true" class="my-4" type="submit">
+            Sign in
+          </button>
+          <p>
+            Don't having an account ?
+            <a href="#" routerLink="/sign-up">Sign up here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

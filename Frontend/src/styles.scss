@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+@import './MyTheme.scss';
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+$primary: #3a2d80;
+$accent: #6957e7;
+$warm: #f44336;
+$basic: #ffffff;
+$secondary: #f0eeee;
+$primaryDark: #522e92;
+$gray3: #253858;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #F8F9FA;
+  color: $gray3;
+}
+
+.drawer {
+  &-content {
+    display: block;
+    position: relative;
+    height: calc(100vh - 65px);
+  }
+
+  &-bar {
+    width: 15%;
+  }
+
+  &-btn {
+    cursor: pointer;
+  }
+
+  &-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  &-image-user {
+    width: 50px;
+    height:50px;
+    margin-right: 10px;
+  }
+}
+

@@ -1,0 +1,100 @@
+<div class="container">
+  <mat-tab-group [disableRipple]="false" mat-align-tabs="center" style="margin-top: 50px;">
+  <mat-tab label="Request for Claim">
+    <form
+      #detailsForm="ngForm"
+      (ngSubmit)="addDetails(detailsForm)"
+      class="container"
+    >
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Policy Holder Id</mat-label>
+          <input
+            matInput
+            placeholder="Policy Holder Id"
+            ngModel
+            name="policyHolderId"
+            id="policyHolderId"
+            required
+            type="number"
+            min="1"
+          >
+          <mat-error class = "error">
+            PolicyHolder Id is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Nominee Id</mat-label>
+          <input
+
+            matInput
+            placeholder="Nominee Id"
+            ngModel
+            name="nomineeId"
+            id="nomineeId"
+            required
+            type="number"
+            min="1"
+          >
+          <mat-error class = "error">
+            Nominee Id is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-12">
+        <mat-form-field
+        appearance="legacy"
+        class="full-width"
+        style="margin-top: 10px"
+      >
+        <mat-label>Illness or Reason for claim</mat-label>
+        <textarea
+          matInput
+          placeholder="Illness or Reason for claim"
+          ngModel
+          name="illness"
+          id="illness"
+          required
+        ></textarea>
+        <mat-error class = "error">
+          Illness or reason for claim are required.
+        </mat-error>
+      </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-12">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Hospital Name and Address</mat-label>
+          <textarea
+            matInput
+            placeholder="Hospital Name and Address"
+            ngModel
+            name="hospitalName"
+            id="hospitalName"
+            required
+          ></textarea>
+          <mat-error class = "error">
+            Hospital Name and Address are required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4"></div>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <button
+        class="full-width"
+        mdbBtn
+        gradient="blue"
+        type="submit"
+      >
+        Send Request
+      </button>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4"></div>
+    </div>
+    </form>
+  </mat-tab>
+</mat-tab-group>
+
+  </div>

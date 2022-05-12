@@ -1,0 +1,68 @@
+<h2 mat-dialog-title >{{data.policyData.policy.policyName}} <span style="font-size: medium;">({{data.policyData.policyApproved}})</span> <span style="float: right; font-weight: 400;">{{data.policyData.buyOn}}</span></h2>
+<mat-dialog-content class="mat-typography">
+ <p>{{data.policyData.policy.description}}</p>
+ <table style="width: 60vw;">
+     <tr>
+         <td><span style="font-weight: 500;">Policy Type : </span> {{data.policyData.policy.policyType[0].toUpperCase()+data.policyData.policy.policyType.slice(1).toLowerCase()}}</td>
+         <td><span style="font-weight: 500;">Premium : </span> Rs. {{data.policyData.policy.premium}}</td>
+         <td><span style="font-weight: 500;">Sum Insured : </span> Rs. {{data.policyData.policy.sumInsured}}</td>
+         <td><span style="font-weight: 500;">Tenure : </span> {{data.policyData.policy.tenure}} yrs.</td>
+         </tr>
+         <tr>
+         <td><span style="font-weight: 500;">Dob : </span> {{data.policyData.dateOfBirthPolicyHolder}}</td>
+     </tr>
+     <tr>
+         <td colspan="4">
+             <h3></h3>
+         </td>
+     </tr>
+     <tr>
+         <td colspan="4">
+             <h3 style="font-weight: 500;">Health Details</h3>
+         </td>
+     </tr>
+     <tr>
+        <td colspan="4"><span style="font-weight: 500;">Accidents : </span> {{data.policyData.accidents==="" ? " NONE": data.policyData.accidents}}</td>
+     </tr>  
+     <tr>
+        <td colspan="4"><span style="font-weight: 500;">Medical : </span> {{data.policyData.medical==="" ? " NONE": data.policyData.medical}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <h3></h3>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h3 style="font-weight: 500;">Nominee Details</h3>
+        </td>
+        <td colspan="2">
+            <h3 style="font-weight: 500;">Nominee Id : {{data.policyData.nominee.nomineeId}}</h3>
+        
+          
+        </td>
+    </tr>
+    <tr>
+        <td><span style="font-weight: 500;">Email : </span> {{data.policyData.nominee.email}}</td>
+        <td><span style="font-weight: 500;">Name : </span> {{data.policyData.nominee.nomineeFirstName}}  {{data.policyData.nominee.nomineeLastName}} ({{data.policyData.nominee.nomineeRelationship}})</td>
+        <td><span style="font-weight: 500;">DOB : </span> {{data.policyData.nominee.nomineeDOB}}</td>
+        <td><span style="font-weight: 500;">Phone : </span> {{data.policyData.nominee.nomineemobileNo}}</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <h3></h3>
+        </td>
+    </tr>
+    <tr *ngIf="data.user==='user'">
+        <td colspan="4">
+            <span style="font-weight: 500;">Policy status : </span>{{data.policyData.hasClaimed ? 'You can\'t claim anymore as you have already claimed for this policy.' : 'No claim done'}}
+        
+            
+        </td>
+    </tr>
+
+ </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mdbBtn color="danger" size="sm" [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>
